@@ -1,0 +1,67 @@
+.temp {
+  margin-top: 200px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 87px;
+}
+.description {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 36px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.description::first-letter {
+  text-transform: uppercase;
+}
+
+.change {
+  margin-top: 36px;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 28px;
+  text-decoration: underline;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.find {
+  margin-top: 36px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 36px;
+  width: 140px;
+  height: 48px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #4c01e0;
+}
+
+.input {
+  margin-top: 240px;
+
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 36px;
+  width: 182px;
+  border: none;
+  background-color: transparent;
+}
+.input:focus {
+  outline: none;
+}
+.input::-webkit-input-placeholder {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.underline {
+  width: 326px;
+}
