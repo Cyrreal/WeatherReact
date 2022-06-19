@@ -27,7 +27,11 @@ export function MainPage({
     <div className={s.container}>
       <div className={s.content}>
         <h1 className={s.title}>Weather</h1>
-        {/* {isGeo === false && <p>Ща ща, грузим</p>} */}
+        {/* {isGeo === false && (
+          <div className="loader">
+            <img src={Loader} />
+          </div>
+        )} */}
         {changeCityStatus === false ? (
           <Weather temp={temp} city={city} description={description} />
         ) : (

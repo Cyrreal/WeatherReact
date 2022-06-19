@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-
+import s from "./Components/MainPage/MainPage.module.css";
+import Loader from "./YrhW.gif";
 import "./App.css";
 import { CityPage } from "./Components/CityPage";
 import { MainPage } from "./Components/MainPage";
+import axios from "axios";
 export type WeatherType = {
   name: string;
 };
@@ -28,11 +30,26 @@ function App() {
     CurentWeather[]
   >([]);
   const [changeCityStatus, setChangeCityStatus] = useState(false);
-  // const [weatherDescription, setWeatherDescription]
+
+  console.log(cityName);
   const limit = 1;
+
+  console.log(isGeo);
+  const getIp = async () => {
+    if (isGeo === false) {
+      const res = await axios.get("https://api.ipify.org/?format=json");
+
+      const cityByIp = await axios.get(
+        `https://geo.ipify.org/api/v2/country,city?apiKey=at_38nQZzdTsm4C9PFIdiAE9383WbSKe&ipAddress=${res.data.ip}`
+      );
+      return setCityName(cityByIp.data.location.city), setIsGeo(true);
+    }
+  };
+
   const onChange = (position: GeolocationPosition) => {
     const { coords } = position;
     const { latitude, longitude } = coords;
+    console.log(latitude);
     setLatitude(latitude);
     setLongitude(longitude);
     setIsGeo(true);
@@ -40,6 +57,7 @@ function App() {
   const onError = (error: any) => {
     setError(error.message);
   };
+
   useEffect(() => {
     const geoposition = navigator.geolocation;
     if (!geoposition) {
@@ -77,21 +95,33 @@ function App() {
     }
   }, [cityName]);
 
+  console.log(error);
+  useEffect(() => {
+    if (error !== "") {
+      getIp();
+    }
+  }, [error]);
+
   console.log(weatherDataInCurrentCity);
   return (
     <div className="wrapper">
-      <MainPage
-        props={weatherDataInCurrentCity}
-        setChangeCityStatus={setChangeCityStatus}
-        changeCityStatus={changeCityStatus}
-        setCityName={setCityName}
-        isGeo={isGeo}
-      />
+      {isGeo !== false ? (
+        <MainPage
+          props={weatherDataInCurrentCity}
+          setChangeCityStatus={setChangeCityStatus}
+          changeCityStatus={changeCityStatus}
+          setCityName={setCityName}
+          isGeo={isGeo}
+        />
+      ) : (
+        <div className={s.container}>
+          <div className={s.content}>
+            <img src={Loader} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
 export default App;
-// function weatherInCurrentCity(weatherInCurrentCity: any) {
-//   throw new Error("Function not implemented.");
-// }
