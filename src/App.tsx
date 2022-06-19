@@ -105,21 +105,13 @@ function App() {
   console.log(weatherDataInCurrentCity);
   return (
     <div className="wrapper">
-      {isGeo !== false ? (
-        <MainPage
-          props={weatherDataInCurrentCity}
-          setChangeCityStatus={setChangeCityStatus}
-          changeCityStatus={changeCityStatus}
-          setCityName={setCityName}
-          isGeo={isGeo}
-        />
-      ) : (
-        <div className={s.container}>
-          <div className={s.content}>
-            <img src={Loader} />
-          </div>
-        </div>
-      )}
+      <MainPage
+        props={weatherDataInCurrentCity}
+        setChangeCityStatus={setChangeCityStatus}
+        changeCityStatus={changeCityStatus}
+        setCityName={setCityName}
+        isGeo={isGeo}
+      />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import s from "../../Components/CityPage/CityPage.module.css";
-
+import Loader from "../../YrhW.gif";
 type Prop = {
   temp: number;
   city: string;
@@ -8,10 +8,19 @@ type Prop = {
 export function Weather({ temp, description, city }: Prop) {
   return (
     <>
-      <p className={s.temp}>{temp}℃</p>
-      <p className={s.description}>
-        {description} in {city}
-      </p>
+      {isNaN(temp) ? (
+        <div className="loader">
+          <img src={Loader} />
+        </div>
+      ) : (
+        <>
+          {" "}
+          <p className={s.temp}>{temp}℃</p>
+          <p className={s.description}>
+            {description} in {city}
+          </p>
+        </>
+      )}
     </>
   );
 }
